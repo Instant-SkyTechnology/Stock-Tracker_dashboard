@@ -1,11 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Stock Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-    
+
+    <header>
+        <a href="index.html">
+            <h1 id="company-name">
+                Stock Name (TICKER)<span class="icon">📈</span>
+            </h1>
+        </a>
+        <h2 id="current-price">
+            Current Price: $<span id="price-value">---</span>
+            <span id="price-arrow"></span>
+        </h2>
+    </header>
+
+    <main class="dashboard-container">
+
+        <!-- Toggle Button -->
+        <button id="toggle-sma-btn">Hide SMA</button>
+
+        <!-- Chart Section -->
+        <section id="chart-section">
+            <canvas id="price-chart" width="800" height="400"></canvas>
+        </section>
+
+        <!-- Stats & Company Info -->
+        <section class="info-section">
+            <div id="key-stats">
+                <h3>Key Statistics</h3>
+                <p>Open: <span id="stat-open">---</span></p>
+                <p>High: <span id="stat-high">---</span></p>
+                <p>Low: <span id="stat-low">---</span></p>
+                <p>Volume: <span id="stat-volume">---</span></p>
+            </div>
+
+            <div id="company-info">
+                <h3>Company Info</h3>
+                <p>Sector: <span id="company-sector">---</span></p>
+                <p>Market Cap: <span id="company-cap">---</span></p>
+                <p>Industry: <span id="company-industry">---</span></p>
+
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news-section">
+            <h3>Latest News</h3>
+            <ul id="news-list"></ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Stock Tracker Dashboard. All Rights Reserved ◈ Steve KALALA</p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
 </body>
+
 </html>

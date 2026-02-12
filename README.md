@@ -13,6 +13,12 @@ This project is a **Stock Tracker Dashboard** that allows users to search for st
 - Set up the project file structure, including HTML, CSS, JS, and assets folders.
 - Researched and tested APIs (Twelve Data and Finnhub) for real-time and historical stock data, company profiles, and news.
 
+### Week 6
+- Implemented stock search functionality on the main page.
+- Integrated API data to fetch real-time stock prices, historical prices, company info, and news.
+- Built the dashboard layout to display charts, key statistics, company info, and news.
+- Displayed charts using **Chart.js** and calculated SMA (Simple Moving Average) for visual analytics.
+
 ---
 
 ## File Structure

@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Stock Tracker Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+    <!-- Header with animated icon -->
+    <header>
+        <h1><span class="icon">📈</span>Stock Tracker Dashboard</h1>
+    </header>
+
+    <main>
+        <div class="search-container">
+            <p>Enter Stock Ticker Symbol</p>
+            <input type="text" id="ticker-input" placeholder="AAPL">
+            <button id="search-btn">Search</button>
+            <p class="example">Example: NVDA, TSLA, MSFT, GOOGL</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Stock Tracker Dashboard. All Rights Reserved ◈ Steve KALALA</p>
+    </footer>
+
+    <script>
+        const searchBtn = document.getElementById("search-btn");
+        const tickerInput = document.getElementById("ticker-input");
+
+        searchBtn.addEventListener("click", () => {
+            const symbol = tickerInput.value.trim().toUpperCase();
+            if (!symbol) {
+                alert("Please enter a stock ticker.");
+                return;
+            }
+            // Redirect to dashboard with symbol as query param
+            window.location.href = `dashboard.html?symbol=${symbol}`;
+        });
+    </script>
 </body>
+
 </html>
