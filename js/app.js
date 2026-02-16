@@ -2,6 +2,29 @@
 const TWELVE_KEY = config.TWELVE_DATA_KEY;
 const FINNHUB_KEY = config.FINNHUB_KEY;
 
+// ================= THEME LOCAL STORAGE =================
+const themeBtn = document.getElementById("theme-btn");
+
+// Load saved theme
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+}
+
+// Toggle theme
+if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-theme");
+
+        const currentTheme = document.body.classList.contains("dark-theme")
+            ? "dark"
+            : "light";
+
+        localStorage.setItem("theme", currentTheme);
+    });
+}
+
+
 // ================= DOM ELEMENTS =================
 const companyNameEl = document.getElementById("company-name");
 const priceValueEl = document.getElementById("price-value");
@@ -28,7 +51,11 @@ let smaVisible = true;
 
 // ================= GET SYMBOL =================
 const params = new URLSearchParams(window.location.search);
-const symbol = (params.get("symbol") || "AAPL").toUpperCase();
+let symbol = (params.get("symbol") || localStorage.getItem("lastSymbol") || "AAPL").toUpperCase();
+
+// Save symbol every time page loads
+localStorage.setItem("lastSymbol", symbol);
+
 
 // ================= REAL-TIME PRICE (Finnhub) =================
 async function fetchRealTimePrice(symbol) {
@@ -152,8 +179,34 @@ toggleSmaBtn.addEventListener("click", () => {
         stockChart.data.datasets[1].hidden = !smaVisible;
         toggleSmaBtn.textContent = smaVisible ? "Hide SMA" : "Show SMA";
         stockChart.update();
+
+        // SAVE preference
+        localStorage.setItem("smaVisible", smaVisible);
     }
 });
+
+// Restore SMA preference
+const savedSma = localStorage.getItem("smaVisible");
+if (savedSma !== null) {
+    smaVisible = savedSma === "true";
+}
+
+// ================= SAVE RECENT SYMBOL =================
+function saveRecentSymbol(symbol) {
+    let recent = JSON.parse(localStorage.getItem("recentSymbols")) || [];
+
+    if (!recent.includes(symbol)) {
+        recent.push(symbol);
+    }
+
+    // Keep only last 5
+    if (recent.length > 5) {
+        recent.shift();
+    }
+
+    localStorage.setItem("recentSymbols", JSON.stringify(recent));
+}
+
 
 // ================= ICON ANIMATION =================
 function updateIcon(price) {
@@ -165,10 +218,14 @@ function updateIcon(price) {
 
 // ================= LOAD DASHBOARD =================
 function loadDashboard() {
+    saveRecentSymbol(symbol);
     fetchRealTimePrice(symbol);
     fetchCompanyProfile(symbol);
     fetchCompanyNews(symbol);
     fetchHistoricalChart(symbol);
+
+    // Save timestamp
+    localStorage.setItem("lastVisit", new Date().toLocaleString());
 }
 
 loadDashboard();

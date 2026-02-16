@@ -19,6 +19,13 @@ This project is a **Stock Tracker Dashboard** that allows users to search for st
 - Built the dashboard layout to display charts, key statistics, company info, and news.
 - Displayed charts using **Chart.js** and calculated SMA (Simple Moving Average) for visual analytics.
 
+### Week 7
+- Finalized styling using a consistent color scheme (dark blue, green, and white) and typography for readability.
+- Added error handling and validation for invalid stock symbols or API errors.
+- Integrated LocalStorage to persist user preferences such as last searched stock symbol, SMA toggle state, theme selection, and recent stock history to enhance user experience.
+- Tested and debugged all features across different stock symbols to ensure data accuracy and responsive layout.
+- Submitted the final project with fully functional search, dashboard, charts, and news integration.
+
 ---
 
 ## File Structure
@@ -26,7 +33,6 @@ This project is a **Stock Tracker Dashboard** that allows users to search for st
 ## Technologies Used
 - **HTML, CSS, JavaScript**
 - **Chart.js** for charts and SMA visualization
-- **app.js and config.js** for fetching data
 - **Twelve Data API** – real-time and historical stock prices
 - **Finnhub API** – company profiles and news
 
